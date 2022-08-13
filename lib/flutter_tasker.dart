@@ -3,12 +3,21 @@
 // found in the LICENSE file.
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'flutter_tasker_platform_interface.dart';
 
 class FlutterTasker {
   static Future<bool> sendCommand(String command) async {
-    return await FlutterTaskerPlatform.instance.sendCommand(command) ?? false;
+    try {
+      return await FlutterTaskerPlatform.instance.sendCommand(command) ?? false;
+    } on PlatformException catch (e) {
+      if(e.code == 'ERROR') {
+        return false;
+      } else {
+        rethrow;
+      }
+    }
   }
 
   static Future<List<String>?> getTasks() {
@@ -16,7 +25,15 @@ class FlutterTasker {
   }
 
   static Future<bool> triggerTask(String task) async {
-    return await FlutterTaskerPlatform.instance.triggerTask(task) ?? false;
+    try {
+      return await FlutterTaskerPlatform.instance.triggerTask(task) ?? false;
+    } on PlatformException catch (e) {
+      if(e.code == 'ERROR') {
+        return false;
+      } else {
+        rethrow;
+      }
+    }
   }
 
   static Future<TaskerStatus> checkStatus() async {
