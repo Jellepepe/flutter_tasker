@@ -7,16 +7,16 @@ import 'package:flutter/foundation.dart';
 import 'flutter_tasker_platform_interface.dart';
 
 class FlutterTasker {
-  static Future<bool?> sendCommand(String command) {
-    return FlutterTaskerPlatform.instance.sendCommand(command);
+  static Future<bool> sendCommand(String command) async {
+    return await FlutterTaskerPlatform.instance.sendCommand(command) ?? false;
   }
 
   static Future<List<String>?> getTasks() {
     return FlutterTaskerPlatform.instance.getTasks();
   }
 
-  static Future<bool?> triggerTask(String task) {
-    return FlutterTaskerPlatform.instance.triggerTask(task);
+  static Future<bool> triggerTask(String task) async {
+    return await FlutterTaskerPlatform.instance.triggerTask(task) ?? false;
   }
 
   static Future<TaskerStatus> checkStatus() async {
@@ -27,12 +27,12 @@ class FlutterTasker {
     return await FlutterTaskerPlatform.instance.checkCommandPermission() ?? false;
   }
 
-  static Future<bool?> requestCommandPermission() {
-    return FlutterTaskerPlatform.instance.requestCommandPermission();
+  static Future<bool> requestCommandPermission() async {
+    return await FlutterTaskerPlatform.instance.requestCommandPermission() ?? false;
   }
 
-  static Future<bool?> openExternalAccessSetting() {
-    return FlutterTaskerPlatform.instance.openExternalAccessSetting();
+  static Future<bool> openExternalAccessSetting() async {
+    return await FlutterTaskerPlatform.instance.openExternalAccessSetting() ?? false;
   }
 }
 
