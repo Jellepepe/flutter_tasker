@@ -19,7 +19,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _flutterTaskerPlugin = FlutterTasker();
 
   String command = "";
   bool commandPermission = false;
@@ -39,7 +38,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 TextButton(
                   onPressed: () {
-                    _flutterTaskerPlugin.checkStatus().then((value) {
+                    FlutterTasker.checkStatus().then((value) {
                       setState(() {
                         status = value;
                       });
@@ -49,7 +48,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _flutterTaskerPlugin.checkCommandPermission().then((value) {
+                    FlutterTasker.checkCommandPermission().then((value) {
                       setState(() {
                         commandPermission = value;
                       });
@@ -64,7 +63,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 TextButton(
                   onPressed: () {
-                    _flutterTaskerPlugin.openExternalAccessSetting().then((value) {
+                    FlutterTasker.openExternalAccessSetting().then((value) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Opened External access menu successfully: $value')));
                     });
                   },
@@ -72,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _flutterTaskerPlugin.requestCommandPermission().then((value) {
+                    FlutterTasker.requestCommandPermission().then((value) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Requested permission successfully: $value')));
                     });
                   },
@@ -82,7 +81,7 @@ class _MyAppState extends State<MyApp> {
             ),
             TextButton(
               onPressed: () {
-                _flutterTaskerPlugin.getTasks().then((value) {
+                FlutterTasker.getTasks().then((value) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Tasks: $value')));
                   setState(() {
                     tasks = value ?? [];
@@ -95,7 +94,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 for (String task  in tasks) TextButton(
                   onPressed: () {
-                    _flutterTaskerPlugin.triggerTask(task);
+                    FlutterTasker.triggerTask(task);
                   },
                   child: Text("Run Task: $task")
                 )
@@ -116,7 +115,7 @@ class _MyAppState extends State<MyApp> {
           child: const Icon(Icons.send),
           onPressed: () {
             try{
-              _flutterTaskerPlugin.sendCommand(command).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Command Result: $value"))));
+              FlutterTasker.sendCommand(command).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Command Result: $value"))));
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Command failed: $e")));
             }
