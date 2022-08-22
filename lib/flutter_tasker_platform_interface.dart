@@ -1,4 +1,4 @@
-// Copyright 2021 Pepe Tiebosch (Jellepepe). All rights reserved.
+// Copyright 2022 Pepe Tiebosch (byme.dev/Jellepepe). All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 

@@ -19,7 +19,7 @@ Use `FlutterTasker.triggerTask(String task)` to trigger a task.
 *Send a command through the Tasker Command System*  
 Use `FlutterTasker.sendCommand(String command)` to send a command.
 
-### Installation
+## How to install
 The relevant permissions are already declared in the android manifest of the plugin:
 ```xml
 <uses-permission android:name="net.dinglisch.android.tasker.PERMISSION_SEND_COMMAND"/>
@@ -28,9 +28,17 @@ The relevant permissions are already declared in the android manifest of the plu
 	<package android:name="net.dinglisch.android.taskerm" />
 </queries>
 ```
-Additionally it requires the option 'Allow external access' to be enabled in the tasker settings.  
+Additionally it requires the option `Allow external access` to be enabled in the tasker settings.  
 Helper functions (`FlutterTasker.checkStatus()` & `FlutterTasker.openExternalAccessSetting()`) are provided to check if this option is enabled and open the relevant menu for the user.
 
-### License
+## Example
+Check the example app for a simple implementation example.
+
+## License
 This project is licensed under a BSD-3 Clause License, see the included LICENSE file for the full text.  
 The `TaskerIntent.java` file was provided by the Tasker developer here: https://tasker.joaoapps.com/code/TaskerIntent.java
+
+## Contribute
+Issues and pull requests are always welcome!  
+If you found this project helpful, consider buying me a cup of :coffee:
+- [PayPal](https://www.paypal.me/bymedev)

@@ -1,7 +1,7 @@
 name: flutter_tasker
 description: Retrieve and trigger Tasker tasks & use the Tasker Command System
 version: 0.1.0
-homepage: byme.dev/flutter_tasker
+homepage: https://github.com/Jellepepe/flutter_tasker
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
