@@ -1,4 +1,4 @@
-// Copyright 2021 Pepe Tiebosch (Jellepepe). All rights reserved.
+// Copyright 2022 Pepe Tiebosch (Jellepepe). All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -12,7 +12,7 @@ class FlutterTasker {
     try {
       return await FlutterTaskerPlatform.instance.sendCommand(command) ?? false;
     } on PlatformException catch (e) {
-      if(e.code == 'ERROR') {
+      if (e.code == 'ERROR') {
         return false;
       } else {
         rethrow;
@@ -28,7 +28,7 @@ class FlutterTasker {
     try {
       return await FlutterTaskerPlatform.instance.triggerTask(task) ?? false;
     } on PlatformException catch (e) {
-      if(e.code == 'ERROR') {
+      if (e.code == 'ERROR') {
         return false;
       } else {
         rethrow;
@@ -45,10 +45,16 @@ class FlutterTasker {
   }
 
   static Future<bool> requestCommandPermission() async {
+    if (await checkStatus() == TaskerStatus.notInstalled) {
+      return false;
+    }
     return await FlutterTaskerPlatform.instance.requestCommandPermission() ?? false;
   }
 
   static Future<bool> openExternalAccessSetting() async {
+    if (await checkStatus() == TaskerStatus.notInstalled) {
+      return false;
+    }
     return await FlutterTaskerPlatform.instance.openExternalAccessSetting() ?? false;
   }
 }
