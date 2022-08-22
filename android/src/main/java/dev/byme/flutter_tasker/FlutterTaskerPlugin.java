@@ -83,7 +83,6 @@ public class FlutterTaskerPlugin implements FlutterPlugin, MethodCallHandler, Ac
           int nameCol = c.getColumnIndex( "name" );
           int projNameCol = c.getColumnIndex( "project_name" );
           while (c.moveToNext()) {
-            System.out.println(c.getString( projNameCol ) + "/" + c.getString( nameCol ));
             list.add(c.getString( nameCol ));
           }
           c.close();
