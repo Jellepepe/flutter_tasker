@@ -2,12 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'flutter_tasker_platform_interface.dart';
 
+/// Implementation of the Tasker Command System and TaskerIntent library
 class FlutterTasker {
+  /// Send a Tasker Command System command
+  ///
+  /// See https://tasker.joaoapps.com/commandsystem.html for more information
   static Future<bool> sendCommand(String command) async {
     try {
       return await FlutterTaskerPlatform.instance.sendCommand(command) ?? false;
@@ -20,10 +23,12 @@ class FlutterTasker {
     }
   }
 
+  /// Get a List of all available tasks
   static Future<List<String>?> getTasks() {
     return FlutterTaskerPlatform.instance.getTasks();
   }
 
+  /// Trigger a [task]
   static Future<bool> triggerTask(String task) async {
     try {
       return await FlutterTaskerPlatform.instance.triggerTask(task) ?? false;
@@ -36,14 +41,19 @@ class FlutterTasker {
     }
   }
 
+  /// Check tasker status, see [TaskerStatus]
   static Future<TaskerStatus> checkStatus() async {
-    return TaskerStatus.fromString(await FlutterTaskerPlatform.instance.checkStatus() ?? '');
+    return TaskerStatus._fromString(await FlutterTaskerPlatform.instance.checkStatus() ?? '');
   }
 
+  /// Check if command permission is granted
   static Future<bool> checkCommandPermission() async {
     return await FlutterTaskerPlatform.instance.checkCommandPermission() ?? false;
   }
 
+  /// Open permission request dialog for Tasker Command permission if not yet granted
+  ///
+  /// Returns [false] if tasker is not installed
   static Future<bool> requestCommandPermission() async {
     if (await checkStatus() == TaskerStatus.notInstalled) {
       return false;
@@ -51,6 +61,9 @@ class FlutterTasker {
     return await FlutterTaskerPlatform.instance.requestCommandPermission() ?? false;
   }
 
+  /// Open SettingsPage in Tasker to enable External Access
+  ///
+  /// Returns [false] if tasker is not installed
   static Future<bool> openExternalAccessSetting() async {
     if (await checkStatus() == TaskerStatus.notInstalled) {
       return false;
@@ -59,6 +72,7 @@ class FlutterTasker {
   }
 }
 
+/// Status of Tasker Service
 enum TaskerStatus {
   notInstalled,
   noPermission,
@@ -69,11 +83,9 @@ enum TaskerStatus {
   invalid;
 
   @override
-  String toString() {
-    return describeEnum(this);
-  }
+  String toString() => name;
 
-  static TaskerStatus fromString(String status) {
+  static TaskerStatus _fromString(String status) {
     switch (status) {
       case 'NotInstalled':
         return TaskerStatus.notInstalled;
