@@ -37,7 +37,7 @@ class FlutterTasker {
   }
 
   static Future<TaskerStatus> checkStatus() async {
-    return TaskerStatus.fromString(await FlutterTaskerPlatform.instance.checkStatus() ?? "");
+    return TaskerStatus.fromString(await FlutterTaskerPlatform.instance.checkStatus() ?? '');
   }
 
   static Future<bool> checkCommandPermission() async {

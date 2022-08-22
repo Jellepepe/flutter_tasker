@@ -13,9 +13,7 @@ class MethodChannelFlutterTasker extends FlutterTaskerPlatform {
 
   @override
   Future<bool?> sendCommand(String command) async {
-    return await methodChannel.invokeMethod<bool>('triggerCommand', <String, String>{
-      'command': command
-    });
+    return await methodChannel.invokeMethod<bool>('triggerCommand', <String, String>{'command': command});
   }
 
   @override
@@ -25,9 +23,7 @@ class MethodChannelFlutterTasker extends FlutterTaskerPlatform {
 
   @override
   Future<bool?> triggerTask(String task) async {
-    return await methodChannel.invokeMethod<bool>('triggerTask', <String,String>{
-      'task': task
-    });
+    return await methodChannel.invokeMethod<bool>('triggerTask', <String, String>{'task': task});
   }
 
   @override
@@ -49,5 +45,4 @@ class MethodChannelFlutterTasker extends FlutterTaskerPlatform {
   Future<bool?> openExternalAccessSetting() async {
     return await methodChannel.invokeMethod<bool>('openExternalAccessSetting');
   }
-
 }
