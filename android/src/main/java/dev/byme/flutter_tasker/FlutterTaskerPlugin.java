@@ -106,7 +106,11 @@ public class FlutterTaskerPlugin implements FlutterPlugin, MethodCallHandler, Ac
         }
       }
     } else if (call.method.equals("checkStatus")) {
-      result.success(TaskerIntent.testStatus(context).toString());
+      TaskerIntent.Status status = TaskerIntent.testStatus(context);
+      if(status == TaskerIntent.Status.NoPermission) {
+        activity.requestPermissions(new String[]{PERMISSION_RUN_TASKS}, 1232);
+      }
+      result.success(status.toString());
     } else if (call.method.equals("checkCommandPermission")) {
       result.success(canSendTaskerCommand());
     } else if (call.method.equals("requestCommandPermission")) {
