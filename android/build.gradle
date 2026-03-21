@@ -24,6 +24,8 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 31
 
+    namespace 'dev.byme.flutter_tasker'
+
     defaultConfig {
         minSdkVersion 16
     }
